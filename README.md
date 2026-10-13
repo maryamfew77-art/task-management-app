@@ -1,35 +1,37 @@
-# TaskFlow — Task Management App
+# TaskFlow — Task Management Application
 
-TaskFlow is a full-stack task management application that helps users organize tasks, manage projects, track progress, and stay on top of deadlines through a clean and responsive dashboard.
+TaskFlow is a full-stack task and project management application designed to help users organize their work, manage projects, track progress, and monitor deadlines through a clean, responsive dashboard.
+
+## Live Demo
+
+- **Live Website:** `YOUR_DEPLOYED_FRONTEND_URL`
+
 
 ## Features
 
 ### Task Management
 - Create, view, update, and delete tasks.
 - Set task status and priority.
-- Add descriptions and due dates.
+- Add task descriptions and due dates.
 - Assign tasks to projects.
-- Search and filter tasks.
-- Sort and paginate task lists.
+- Search, filter, sort, and paginate tasks.
 - Identify overdue tasks.
 
 ### Project Management
 - Create, edit, and delete projects.
 - Update project status.
-- View task counts and project progress.
-- Track completed tasks within projects.
-- Preserve tasks when a project is deleted.
+- Track task counts and completion progress.
+- Preserve tasks when deleting a project.
 
 ### Dashboard
 - View task and project statistics.
-- Monitor task completion and project progress.
-- Manage work from a centralized dashboard.
+- Monitor task completion and progress.
+- Manage tasks and projects from one place.
 
-### Additional Features
-- REST API built with Express.js.
-- PostgreSQL database for persistent storage.
+### Backend and Database
+- RESTful API built with Express.js.
+- PostgreSQL database for persistent data storage.
 - Input validation and error handling.
-- Responsive user interface.
 - User registration and authentication features, where implemented.
 
 ## Technologies Used
@@ -48,7 +50,7 @@ TaskFlow is a full-stack task management application that helps users organize t
 **Database**
 - PostgreSQL
 
-**Other Tools**
+**Development Tools**
 - Git and GitHub
 - Postman
 - pgAdmin
@@ -73,37 +75,33 @@ task-management-app/
 └── README.md
 ```
 
-*The structure may vary depending on your final implementation.*
-
-## Getting Started
+## Run Locally
 
 ### Prerequisites
-
-Make sure you have installed:
 - Node.js and npm
 - PostgreSQL
 - Git
 
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone YOUR_GITHUB_REPOSITORY_URL
 cd task-management-app
 ```
 
-### 2. Set Up the Frontend
-
-Install the dependencies:
+### 2. Install frontend dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Set Up the Database
+### 3. Configure the database
 
-Create a PostgreSQL database and configure your database connection in `backend/db.js`.
+Create a PostgreSQL database and configure the database connection in `backend/db.js`.
 
-Run the database setup script from the backend directory if your project uses it:
+Keep database credentials in environment variables and never commit secrets to GitHub.
+
+### 4. Install and initialize the backend
 
 ```bash
 cd backend
@@ -111,31 +109,35 @@ npm install
 node setupDatabase.js
 ```
 
-Ensure the required database tables and columns exist before starting the application.
+Run the setup script only if it matches your database initialization process.
 
-### 4. Configure the Backend
-
-Set the required database connection settings in `backend/db.js`. Keep database credentials out of your public repository.
-
-Start the backend:
+### 5. Start the backend
 
 ```bash
 node app.js
 ```
 
-The backend runs on port `5000` by default.
+The backend uses port `5000` by default.
 
-### 5. Start the Frontend
+### 6. Configure the frontend API URL
 
-Open a separate terminal in the project root and run:
+For local development, the API URL is:
+
+```ts
+const API_URL = "http://localhost:5000";
+```
+
+For production, configure the frontend to use your deployed backend URL, preferably through a Next.js public environment variable such as `NEXT_PUBLIC_API_URL`.
+
+### 7. Start the frontend
+
+Open a separate terminal in the project root:
 
 ```bash
 npm run dev
 ```
 
-Open the application at:
-
-http://localhost:3000
+Visit `http://localhost:3000` to use TaskFlow locally.
 
 ## API Endpoints
 
@@ -157,27 +159,27 @@ http://localhost:3000
 | PATCH | `/api/projects/:id` | Update a project |
 | DELETE | `/api/projects/:id` | Delete a project |
 
-### Authentication and Testing
+### Other Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/auth/register` | Register a user |
+| GET | `/` | Check backend status |
 | GET | `/api/db-test` | Check database connectivity |
+| POST | `/api/auth/register` | Register a user |
 
-## Task Status and Priority
+## Deployment
 
-**Task statuses:** Pending, In Progress, Completed
+TaskFlow requires separate deployment configuration for the frontend, backend, and PostgreSQL database.
 
-**Task priorities:** Low, Medium, High
+1. Deploy the Next.js frontend to a hosting platform that supports Next.js.
+2. Deploy the Express.js backend to a Node.js-compatible hosting platform.
+3. Configure a hosted PostgreSQL database.
+4. Add the required database credentials as backend environment variables.
+5. Set the frontend API URL to the deployed backend address.
+6. Configure CORS to allow requests from the deployed frontend domain.
+7. Test all features on the live website.
 
-**Project statuses:** Not Started, In Progress, Completed
-
-## Future Improvements
-
-- Complete user login and authorization if not yet implemented.
-- Deploy the application for public access.
-- Add automated testing and improve security.
-- Introduce notifications and additional productivity features.
+**Important:** `localhost` refers to the user's own computer. A deployed website cannot use your local backend, so update the API URL before launch.
 
 ## Author
 
@@ -187,4 +189,4 @@ Software Engineering Student | Frontend & Full-Stack Development
 
 ## License
 
-This project was developed for learning and educational purposes.
+This project was developed for educational and learning purposes.
